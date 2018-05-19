@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="item_layout_height">76dp</dimen>
+    <dimen name="item_layout_width">90dp</dimen>
+    <dimen name="item_height">19dp</dimen>
+
+    <dimen name="rune_default_width_et">50dp</dimen>
+    <dimen name="rune_default_height_et">24dp</dimen>
+
+</resources>

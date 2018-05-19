@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">符文</string>
+    <string name="fragment_replace_delay">200</string>
+</resources>
