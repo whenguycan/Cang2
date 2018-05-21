@@ -1,4 +1,8 @@
 <resources>
-    <string name="app_name">符文</string>
+    <string name="app_name">苍之纪元</string>
     <string name="fragment_replace_delay">200</string>
+    <string name="title_activity_entrance">EntranceActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
