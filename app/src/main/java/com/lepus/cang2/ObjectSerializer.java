@@ -1,6 +1,7 @@
 package com.lepus.cang2;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -14,9 +15,20 @@ import java.io.ObjectOutputStream;
  */
 
 public class ObjectSerializer {
+
+    private final String TAG = getClass().getSimpleName();
+
     public static final String FILE_NAME_DATA = "db_data";
     public static final String INTENT_SERIALIZE_SUCCESS = "serialize.success";
+
+    public static final String EXTERNAL_FILE_DIR = Environment.getExternalStorageDirectory() + "/apps/com.lepus.cang2";
+
     private Context context;
+
+    private File getFilesDir(){
+//        return context.getFilesDir();
+        return new File(EXTERNAL_FILE_DIR);
+    }
 
     private ObjectSerializer(){
 
@@ -30,7 +42,10 @@ public class ObjectSerializer {
 
 	public void serialize(String filename, Object o) {
 		try {
-			File file = new File(context.getFilesDir(), filename);
+		    File dir = getFilesDir();
+		    if(!dir.exists())
+		        dir.mkdirs();
+			File file = new File(dir, filename);
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
 			oos.writeObject(o);
 			oos.flush();
@@ -42,17 +57,22 @@ public class ObjectSerializer {
 
 	public <T> T deserialize(String filename){
 		try {
-			File file = new File(context.getFilesDir(), filename);
-			if(file == null || !file.exists()) {
-				Data data = new Data();
-				data.init();
-				serialize(FILE_NAME_DATA, data);
-				return (T) data;
-			}
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-			Object o = ois.readObject();
-			ois.close();
-			return (T) o;
+		    if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())){
+                File file = new File(getFilesDir(), filename);
+//			    File file = new File(context.getFilesDir(), filename);
+                if(!file.exists()) {
+                    Data data = new Data();
+                    data.init();
+                    serialize(FILE_NAME_DATA, data);
+                    return (T) data;
+                }
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+                Object o = ois.readObject();
+                ois.close();
+                return (T) o;
+            }else{
+		        throw new RuntimeException("sd card not mounted");
+            }
 		} catch (Exception e){
 			Log.e(getClass().getSimpleName(), "deserialize: " + e.getMessage());
 		}

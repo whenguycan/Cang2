@@ -9,9 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity {
 		}
 
 		list = data.list(Color.MAGENTA);
+
 		dataDisplay = new Data();
 		dataDisplay.list = list;
 
@@ -64,14 +65,11 @@ public class MainActivity extends BaseActivity {
                 return view;
             }
         });
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(getContext(), RuneActivity.class);
-				intent.putExtra("object", dataDisplay);
-				intent.putExtra("position", position);
-				startActivity(intent);
-            }
+        gv.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(getContext(), RuneActivity.class);
+            intent.putExtra("object", dataDisplay);
+            intent.putExtra("position", position);
+            startActivity(intent);
         });
 
         registerReceiver(receiver, new IntentFilter(ObjectSerializer.INTENT_SERIALIZE_SUCCESS));

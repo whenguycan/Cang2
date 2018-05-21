@@ -1,6 +1,5 @@
 package com.lepus.cang2;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -69,66 +68,37 @@ public class RuneFragment extends Fragment {
         for(int i=0, len=5; i<len; i++){
             final int idx = i;
             tvArr[i].setText(rune.count(i));
-            ivMinusArr[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    minus(tvArr[idx]);
+            ivMinusArr[i].setOnClickListener(v -> minus(tvArr[idx]));
+            ivMinusArr[i].setOnTouchListener((v, event) -> {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        ivMinusArr[idx].setImageResource(R.drawable.ic_remove_circle_blue_24dp);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        ivMinusArr[idx].setImageResource(R.drawable.ic_remove_circle_outline_blue_24dp);
+                        break;
                 }
+                return false;
             });
-            ivMinusArr[i].setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            ivMinusArr[idx].setImageResource(R.drawable.ic_remove_circle_blue_24dp);
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            ivMinusArr[idx].setImageResource(R.drawable.ic_remove_circle_outline_blue_24dp);
-                            break;
-                    }
-                    return false;
+            ivPlusArr[i].setOnClickListener(v -> plus(tvArr[idx]));
+            ivPlusArr[i].setOnTouchListener((v, event) -> {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        ivPlusArr[idx].setImageResource(R.drawable.ic_add_circle_blue_24dp);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        ivPlusArr[idx].setImageResource(R.drawable.ic_add_circle_outline_blue_24dp);
+                        break;
                 }
-            });
-            ivPlusArr[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    plus(tvArr[idx]);
-                }
-            });
-            ivPlusArr[i].setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            ivPlusArr[idx].setImageResource(R.drawable.ic_add_circle_blue_24dp);
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            ivPlusArr[idx].setImageResource(R.drawable.ic_add_circle_outline_blue_24dp);
-                            break;
-                    }
-                    return false;
-                }
+                return false;
             });
         }
 
-        view.findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                update();
-            }
-        });
+        view.findViewById(R.id.btn_save).setOnClickListener(v -> update());
 
-        view.findViewById(R.id.btn_save_return).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                update();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getActivity().onBackPressed();
-                    }
-                }, 200);
-            }
+        view.findViewById(R.id.btn_save_return).setOnClickListener(v -> {
+            update();
+            new Handler().postDelayed(() -> getActivity().onBackPressed(), 200);
         });
 
         return view;
