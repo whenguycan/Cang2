@@ -1,4 +1,4 @@
-package com.lepus.cang2;
+package com.lepus.cang2.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,6 +14,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+
+import com.lepus.cang2.Data;
+import com.lepus.cang2.ObjectSerializer;
+import com.lepus.cang2.R;
+import com.lepus.cang2.Rune;
 
 import org.greenrobot.eventbus.EventBus;
 

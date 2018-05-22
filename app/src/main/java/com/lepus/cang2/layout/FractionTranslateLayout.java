@@ -1,4 +1,4 @@
-package com.lepus.cang2;
+package com.lepus.cang2.layout;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,6 +1,8 @@
-package com.lepus.cang2;
+package com.lepus.cang2.activity;
 
 import android.os.Bundle;
+
+import com.lepus.cang2.R;
 
 public class EntranceActivity extends BaseActivity {
 

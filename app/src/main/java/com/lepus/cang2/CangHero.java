@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class CangHero {
 
-    static class HeroData {
+    public static class HeroData {
 
         public static final int FIND_ALL = -1;
         public static final int FIND_BY_MAP_NAME = 0;

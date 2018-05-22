@@ -13,7 +13,7 @@ import java.util.List;
 public class Data implements Serializable {
     private static final long serialVersionUID = -5693000217434751989L;
 
-    List<Rune> list = new ArrayList<>();
+    public List<Rune> list = new ArrayList<>();
 
     public List<Rune> list(int... colors){
         if(colors == null || colors.length == 0)

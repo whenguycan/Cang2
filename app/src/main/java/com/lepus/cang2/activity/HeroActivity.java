@@ -1,4 +1,4 @@
-package com.lepus.cang2;
+package com.lepus.cang2.activity;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
+
+import com.lepus.cang2.CangHero;
+import com.lepus.cang2.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

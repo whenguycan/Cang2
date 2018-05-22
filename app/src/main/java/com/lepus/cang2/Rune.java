@@ -9,9 +9,9 @@ public class Rune implements Serializable{
 
 	public static final int[] W = {81, 27, 9, 3, 1};
 
-	int idx;
-	String name;
-	int color;
+	public int idx;
+	public String name;
+	public int color;
 	String sum;
 
 	public Rune(){

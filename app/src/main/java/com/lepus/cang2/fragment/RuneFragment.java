@@ -1,4 +1,4 @@
-package com.lepus.cang2;
+package com.lepus.cang2.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.lepus.cang2.ObjectSerializer;
+import com.lepus.cang2.R;
+import com.lepus.cang2.Rune;
+import com.lepus.cang2.StringUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

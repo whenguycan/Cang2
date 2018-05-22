@@ -1,10 +1,15 @@
-package com.lepus.cang2;
+package com.lepus.cang2.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.widget.Toast;
+
+import com.lepus.cang2.Data;
+import com.lepus.cang2.R;
+import com.lepus.cang2.Rune;
+import com.lepus.cang2.fragment.RuneFragment;
 
 /**
  * Created by WANG on 2018/5/15.
