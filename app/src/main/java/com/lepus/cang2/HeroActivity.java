@@ -12,6 +12,9 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -64,12 +67,37 @@ public class HeroActivity extends BaseActivity {
 
     private void reloadListView(){
         List<String> result = new ArrayList<>();
+        Set<String> set = new HashSet<>();
         if(!selected.isEmpty()){
-            for(String name : selected){
-                result.addAll(heroData.find(2, name));
+            if(selected.size() == 1){
+                set.addAll(heroData.find(CangHero.HeroData.FIND_BY_HERO_NAME, selected.iterator().next()));
+            }else{
+                for(Iterator<String> iterator = selected.iterator(); iterator.hasNext(); ){
+                    String s = iterator.next();
+                    if(set.isEmpty()){
+                        set.addAll(heroData.find(CangHero.HeroData.FIND_BY_HERO_NAME, s));
+                    }else{
+                        intersection(set, heroData.find(CangHero.HeroData.FIND_BY_HERO_NAME, s));
+                    }
+                }
             }
+            result.addAll(set);
+            Collections.sort(result, (o1, o2) -> {
+                String pre1 = o1.substring(0, o1.indexOf("."));
+                String pre2 = o2.substring(0, o2.indexOf("."));
+                return Integer.parseInt(pre1) - Integer.parseInt(pre2);
+            });
         }
         lv.setAdapter(new ArrayAdapter<>(getContext(), R.layout.item_hero_lv, R.id.tv_hero, result));
+    }
+
+    private void intersection(Set<String> template, List<String> contrast){
+        for(Iterator<String> iterator = template.iterator(); iterator.hasNext(); ){
+            String s = iterator.next();
+            if(!contrast.contains(s)){
+                iterator.remove();
+            }
+        }
     }
 
 }

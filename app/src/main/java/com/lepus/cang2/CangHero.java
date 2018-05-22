@@ -3,7 +3,6 @@ package com.lepus.cang2;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,10 +15,18 @@ public class CangHero {
 
     static class HeroData {
 
+        public static final int FIND_ALL = -1;
+        public static final int FIND_BY_MAP_NAME = 0;
+        public static final int FIND_BY_MAP_ORDER = 1;
+        public static final int FIND_BY_HERO_NAME = 2;
+
+        public static final int COUNT_ALL = 0;
+        public static final int COUNT_BY_HERO_NAME = 1;
+
         List<String> list = new ArrayList<>();
 
         public List<String> showAll(){
-            List<String> list = count(0, null);
+            List<String> list = count(COUNT_ALL, null);
             List<String> target = new ArrayList<>();
             for(String s : list) {
                 int idx = s.indexOf("_");
@@ -40,7 +47,7 @@ public class CangHero {
                 if(arr.length > 2){
                     String[] names = arr[2].split("\\+");
                     for(String name : Arrays.asList(names)){
-                        if (count == 0 || (count == 1 && name.equals(key))) {
+                        if (count == COUNT_ALL || (COUNT_BY_HERO_NAME == 1 && name.equals(key))) {
                             nameSet.add(name);
                         }
                     }
@@ -49,7 +56,7 @@ public class CangHero {
 
             List<Counter> find = new ArrayList<>();
             for(String name : nameSet){
-                List<String> l = find(2, name);
+                List<String> l = find(FIND_BY_HERO_NAME, name);
                 find.add(Counter.newInstance(name, l.size()));
             }
 
