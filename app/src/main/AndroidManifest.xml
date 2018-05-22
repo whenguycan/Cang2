@@ -14,20 +14,20 @@
         android:theme="@style/AppTheme">
         <!-- MainActivity -->
         <!-- EntranceActivity -->
-        <activity android:name=".EntranceActivity">
+        <activity android:name=".activity.EntranceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".EntranceActivity"
+        <!--<activity android:name=".activity.EntranceActivity"
             android:theme="@style/AppTheme" />-->
-        <activity android:name=".RuneActivity"
+        <activity android:name=".activity.RuneActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".MainActivity"
+        <activity android:name=".activity.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".HeroActivity"
+        <activity android:name=".activity.HeroActivity"
             android:theme="@style/AppTheme" />
     </application>
 
