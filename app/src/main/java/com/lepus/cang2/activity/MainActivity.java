@@ -79,10 +79,10 @@ public class MainActivity extends BaseActivity {
             }
         });
         gv.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(getContext(), RuneActivity.class);
-            intent.putExtra("object", dataDisplay);
-            intent.putExtra("position", position);
-            startActivity(intent);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("object", dataDisplay);
+            bundle.putInt("position", position);
+            startActivity(RuneActivity.class, bundle);
         });
 
         super.onResume();
