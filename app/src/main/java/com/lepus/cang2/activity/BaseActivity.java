@@ -3,6 +3,7 @@ package com.lepus.cang2.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -34,6 +35,10 @@ public class BaseActivity extends AppCompatActivity {
 
 	protected void makeText(String text){
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    public void delay(Runnable task, int delay){
+        new Handler().postDelayed(task, delay);
     }
 
 	@Override
