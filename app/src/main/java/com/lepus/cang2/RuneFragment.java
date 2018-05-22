@@ -14,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 /**
  * Created by wang on 2018/5/19.
  */
@@ -40,6 +44,8 @@ public class RuneFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rune, container, false);
+
+        EventBus.getDefault().register(this);
 
         TextView tv = view.findViewById(R.id.tv_name);
         tv.setText(rune.name);
@@ -104,6 +110,13 @@ public class RuneFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        if(EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
     private void minus(TextView tv){
         String text = tv.getText().toString();
         if(StringUtils.isEmpty(text))
@@ -129,6 +142,10 @@ public class RuneFragment extends Fragment {
         Intent intent = new Intent(ObjectSerializer.INTENT_SERIALIZE_SUCCESS);
         intent.putExtra("object", rune);
         mContext.sendBroadcast(intent);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessage(Rune r){
         Toast.makeText(mContext, "save success", Toast.LENGTH_SHORT).show();
     }
 
