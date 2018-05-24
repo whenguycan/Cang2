@@ -55,26 +55,26 @@ public class BottomDialog {
         public Dialog create(){
             Dialog dialog = new Dialog(context, styleResId);
             View view = LayoutInflater.from(context).inflate(layoutResId, null);
+            view.measure(0, 0);
             dialog.setContentView(view);
-            for(int id : ids){
-                view.findViewById(id).setOnClickListener(v -> onItemClickListener.onClick(dialog, v));
-                if(delay != DELAY_DEFAULT)
-                    new Handler().postDelayed(() -> dialog.dismiss(), delay);
-            }
             dialog.getWindow().setGravity(Gravity.BOTTOM);
             WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
             lp.x = 0;
             lp.y = 0;
             lp.width = context.getResources().getDisplayMetrics().widthPixels;
-            view.measure(0, 0);
             lp.height = view.getMeasuredHeight();
             lp.alpha = 0.9f;
             dialog.getWindow().setAttributes(lp);
+            for(int id : ids){
+                view.findViewById(id).setOnClickListener(v -> onItemClickListener.onClick(dialog, v));
+                if(delay != DELAY_DEFAULT)
+                    new Handler().postDelayed(() -> dialog.dismiss(), delay);
+            }
             return dialog;
         }
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onClick(Dialog dialog, View view);
     }
 
