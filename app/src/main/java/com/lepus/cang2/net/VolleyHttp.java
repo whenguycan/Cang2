@@ -25,7 +25,7 @@ public class VolleyHttp {
 
     public static synchronized RequestQueue getRequestQueue(Context context){
         if(context == null)
-            throw new RuntimeException("context 不能为空");
+            throw new RuntimeException("context must not be null");
         if(requestQueue == null)
             requestQueue = Volley.newRequestQueue(context);
         return requestQueue;
@@ -33,7 +33,7 @@ public class VolleyHttp {
 
     public static VolleyHttpConfigure configure(Context context){
         if(context == null)
-            throw new RuntimeException("context 不能为空");
+            throw new RuntimeException("context must not be null");
         VolleyHttpConfigure configure = new VolleyHttpConfigure();
         configure.context = context;
         return configure;
@@ -120,10 +120,6 @@ public class VolleyHttp {
     }
 
     public interface StringHttpRequestListener extends Response.Listener<String> {
-
-    }
-
-    public interface StringHttpRequestErrorListener extends Response.ErrorListener {
 
     }
 
